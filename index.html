@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RCE – Ingeniería eléctrica y electrónica</title>
+  <meta name="description" content="RCE: proyectos eléctricos, tableros, eficiencia energética, energía solar e IoT industrial." />
+  <meta name="theme-color" content="#0f172a" />
+  <meta property="og:title" content="RCE – Ingeniería eléctrica y electrónica" />
+  <meta property="og:description" content="Instalaciones, mantenimiento y proyectos con foco en seguridad eléctrica y performance." />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #0f172a;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --brand: #22c55e;
+      --brand-2: #06b6d4;
+      --ring: rgba(34,197,94,.35);
+      --maxw: 1100px;
+    }
+    * { box-sizing: border-box }
+    html, body { margin:0; padding:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; background: var(--bg); color: var(--text); }
+    a { color: inherit; text-decoration: none }
+    .container { width:100%; max-width: var(--maxw); margin-inline:auto; padding: 0 1rem }
+    header { position: sticky; top:0; z-index: 20; background: linear-gradient(180deg, rgba(11,18,32,.95), rgba(11,18,32,.7) 70%, rgba(11,18,32,0)); backdrop-filter: saturate(140%) blur(6px); border-bottom: 1px solid rgba(148,163,184,.12) }
+    .nav { display:flex; align-items:center; justify-content: space-between; height: 64px }
+    .brand { display:flex; align-items:center; gap:.6rem; font-weight:700 }
+    .brand .logo { display:grid; place-items:center; width:32px; height:32px; border-radius:8px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 0 0 2px rgba(255,255,255,.05) inset }
+    .nav a.btn { padding:.55rem .9rem; border:1px solid rgba(148,163,184,.25); border-radius:10px }
+    .nav a.btn:hover { border-color: rgba(34,197,94,.6) }
+    .hero { display:grid; place-items:center; padding: 74px 0 36px; text-align:center }
+    .hero h1 { font-size: clamp(28px, 4.5vw, 48px); line-height:1.1; margin: 0 0 .5rem }
+    .hero p { max-width: 720px; margin: .25rem auto 1.2rem; color: var(--muted) }
+    .cta { display:flex; gap:.8rem; flex-wrap:wrap; justify-content:center }
+    .cta a { padding:.8rem 1.1rem; border-radius:12px; font-weight:600; border:1px solid transparent }
+    .cta .primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color:#041014 }
+    .cta .secondary { border-color: rgba(148,163,184,.25) }
+
+    section { padding: 56px 0 }
+    .section-title { font-size: clamp(22px, 3vw, 32px); margin:0 0 .75rem }
+    .muted { color: var(--muted) }
+
+    .grid { display:grid; gap:1rem }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)) }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)) }
+    @media (max-width: 900px){ .grid.cols-3 { grid-template-columns: 1fr 1fr } }
+    @media (max-width: 640px){ .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr } }
+
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)); border: 1px solid rgba(148,163,184,.15); border-radius:16px; padding:1rem; transition: border-color .15s ease }
+    .card:hover { border-color: var(--ring) }
+    .pill { display:inline-flex; gap:.45rem; align-items:center; border:1px solid rgba(148,163,184,.25); padding:.25rem .55rem; border-radius:999px; font-size:.8rem; color: var(--muted) }
+
+    .services .card h3 { margin:.2rem 0 .35rem; font-size:1.05rem }
+    .services .card p { margin:0; color: var(--muted) }
+
+    .kpis { display:grid; gap:.8rem; grid-template-columns: repeat(4, minmax(0,1fr)); margin-top:1rem }
+    @media (max-width: 800px){ .kpis { grid-template-columns: repeat(2, minmax(0,1fr)) } }
+    .kpi { background: var(--panel); border:1px solid rgba(148,163,184,.12); border-radius:14px; padding:1rem }
+    .kpi .n { font-weight:800; font-size:1.4rem }
+
+    .portfolio .thumb { aspect-ratio:16/9; border-radius:12px; background: #0a0f1a; border:1px solid rgba(148,163,184,.15); display:grid; place-items:center; font-size:.9rem; color: var(--muted) }
+
+    .contact form { display:grid; gap:.8rem; max-width:680px }
+    input, textarea { width:100%; background:#0b1324; border:1px solid rgba(148,163,184,.22); color:var(--text); border-radius:12px; padding:.8rem .9rem; outline: none }
+    input:focus, textarea:focus { border-color: var(--ring); box-shadow: 0 0 0 4px rgba(34,197,94,.06) }
+    button { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color:#051016; border:0; padding:.9rem 1.1rem; border-radius:12px; font-weight:700; cursor:pointer }
+    footer { padding: 24px 0 48px; border-top: 1px solid rgba(148,163,184,.12); color: var(--muted) }
+    .row { display:flex; gap:.75rem; flex-wrap:wrap }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">⚡</div>
+        <a href="#inicio" aria-label="Ir a inicio">RCE</a>
+      </div>
+      <nav class="row" aria-label="Principal">
+        <a class="btn" href="#servicios">Servicios</a>
+        <a class="btn" href="#proyectos">Proyectos</a>
+        <a class="btn" href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inicio" class="hero">
+    <div class="container">
+      <h1>Ingeniería eléctrica y electrónica para empresas</h1>
+      <p>Diseño de tableros, instalaciones seguras, auditorías eléctricas, integración fotovoltaica y monitoreo IoT. Ejecutamos con estándares industriales y documentación clara.</p>
+      <div class="cta">
+        <a class="primary" href="#contacto">Solicitar presupuesto</a>
+        <a class="secondary" href="https://wa.me/5490000000000" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="n">+10 años</div><div class="muted">experiencia</div></div>
+        <div class="kpi"><div class="n">IEC/IRAM</div><div class="muted">normativa</div></div>
+        <div class="kpi"><div class="n">24/7</div><div class="muted">soporte urgente</div></div>
+        <div class="kpi"><div class="n">QA</div><div class="muted">pruebas & medición</div></div>
+      </div>
+    </div>
+  </main>
+
+  <section id="servicios" class="services">
+    <div class="container">
+      <h2 class="section-title">Servicios</h2>
+      <p class="muted">Soluciones llave en mano con documentación técnica y seguridad eléctrica.</p>
+      <div class="grid cols-3" role="list">
+        <article class="card" role="listitem">
+          <span class="pill">Tableros & Puesta a tierra</span>
+          <h3>Tableros eléctricos y selectividad</h3>
+          <p>Diseño, armado y verificaciones con mediciones de cortocircuito, curvas y selectividad.</p>
+        </article>
+        <article class="card" role="listitem">
+          <span class="pill">Fotovoltaica</span>
+          <h3>Integración de paneles solares</h3>
+          <p>Estudio de inyección/costo, inversores on-grid/off-grid e interconexión segura con red.</p>
+        </article>
+        <article class="card" role="listitem">
+          <span class="pill">Eficiencia</span>
+          <h3>Auditorías y eficiencia energética</h3>
+          <p>Relevamiento IRAM, balance de cargas, corrección de factor de potencia y planes de mejora.</p>
+        </article>
+        <article class="card" role="listitem">
+          <span class="pill">Automatización</span>
+          <h3>Control & IoT industrial</h3>
+          <p>SCADA, sensado remoto, registro de datos y tableros de control para mantenimiento.</p>
+        </article>
+        <article class="card" role="listitem">
+          <span class="pill">Seguridad</span>
+          <h3>Seguridad eléctrica</h3>
+          <p>Protecciones diferenciales, térmicas y coordinación. Etiquetado y maniobra segura.</p>
+        </article>
+        <article class="card" role="listitem">
+          <span class="pill">Documentación</span>
+          <h3>Planos & protocolos</h3>
+          <p>Planos unifilares/as-built, memorias técnicas, protocolos de medición y bitácoras.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos" class="portfolio">
+    <div class="container">
+      <h2 class="section-title">Proyectos recientes</h2>
+      <div class="grid cols-3" role="list">
+        <div class="card" role="listitem">
+          <div class="thumb">Sala de servidores – nuevo tablero</div>
+          <p class="muted">Tendido, canalizaciones y selectividad de protecciones.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="thumb">Planta fotovoltaica 15 kWp</div>
+          <p class="muted">Inversor on-grid con inyección limitada y monitoreo.</p>
+        </div>
+        <div class="card" role="listitem">
+          <div class="thumb">Auditoría energética</div>
+          <p class="muted">Balance de cargas y plan de reducción del 18%.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact">
+    <div class="container">
+      <h2 class="section-title">Contacto</h2>
+      <p class="muted">Contanos tu necesidad técnica y te respondemos en 24 h.</p>
+      <!-- Opción 1: mailto (simple, sin backend) -->
+      <form id="contactForm" action="mailto:contacto@rce.com" method="post" enctype="text/plain">
+        <div class="grid cols-2">
+          <label>
+            <span class="muted">Nombre</span>
+            <input required name="nombre" placeholder="Tu nombre" />
+          </label>
+          <label>
+            <span class="muted">Email</span>
+            <input required type="email" name="email" placeholder="tu@email.com" />
+          </label>
+        </div>
+        <label>
+          <span class="muted">Mensaje</span>
+          <textarea required name="mensaje" rows="5" placeholder="Cómo podemos ayudar…"></textarea>
+        </label>
+        <div class="row">
+          <button type="submit">Enviar consulta</button>
+          <a class="pill" href="https://wa.me/5490000000000" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">WhatsApp directo</a>
+        </div>
+      </form>
+      <p class="muted" style="margin-top:.6rem;font-size:.9rem">Si el botón de correo no funciona en tu navegador, escribinos a <a href="mailto:contacto@rce.com">contacto@rce.com</a>.</p>
+      <!-- Opción 2 alternativa: usar Formspree/StaticForms cambiando action del form por su endpoint gratuito -->
+    </div>
+  </section>
+
+  <footer>
+    <div class="container row" style="justify-content:space-between">
+      <div>© <span id="year"></span> RCE. Todos los derechos reservados.</div>
+      <div class="row">
+        <a href="#inicio">Inicio</a>
+        <span class="muted">•</span>
+        <a href="#servicios">Servicios</a>
+        <span class="muted">•</span>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Año dinámico y validación simple del formulario
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Evita enviar el form si no hay soporte para mailto en el navegador
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      const ok = this.checkValidity();
+      if(!ok){ e.preventDefault(); this.reportValidity(); }
+    });
+  </script>
+</body>
+</html>
